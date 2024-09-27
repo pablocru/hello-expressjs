@@ -10,6 +10,8 @@
   "dependencies": {
     "@hello-expressjs/environment-config": "workspace:^",
     "@hello-expressjs/server-shutdown-handler": "workspace:^",
+    "bcrypt": "^5.1.1",
+    "db-local": "^3.1.0",
     "express": "^4.21.0"
   }
 }

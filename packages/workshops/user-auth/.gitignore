@@ -1,0 +1,2 @@
+# Ignore development database folder created by "db-local"
+local-database/
