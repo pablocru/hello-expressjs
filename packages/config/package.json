@@ -1,0 +1,16 @@
+{
+  "name": "@hello-expressjs/config",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/config.js",
+  "devDependencies": {
+    "semistandard": "^17.0.0"
+  },
+  "eslintConfig": {
+    "extends": "semistandard"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}

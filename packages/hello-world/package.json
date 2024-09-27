@@ -8,6 +8,7 @@
     "dev": "node --watch src/index.js"
   },
   "dependencies": {
+    "@hello-expressjs/config": "workspace:^",
     "express": "^4.21.0"
   },
   "devDependencies": {
