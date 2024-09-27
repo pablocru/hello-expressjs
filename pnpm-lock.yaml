@@ -18,6 +18,16 @@ importers:
         specifier: ^17.0.0
         version: 17.0.0
 
+  packages/user-auth:
+    dependencies:
+      express:
+        specifier: ^4.21.0
+        version: 4.21.0
+    devDependencies:
+      semistandard:
+        specifier: ^17.0.0
+        version: 17.0.0
+
 packages:
 
   '@eslint-community/eslint-utils@4.4.0':
