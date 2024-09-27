@@ -10,7 +10,11 @@
     "semistandard": "^17.0.0"
   },
   "eslintConfig": {
-    "extends": "semistandard"
+    "extends": "semistandard",
+    "rules": {
+      "space-before-function-paren": "off",
+      "comma-dangle": "off"
+    }
   },
   "prettier": {
     "singleQuote": true
