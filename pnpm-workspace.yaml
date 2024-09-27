@@ -1,2 +1,4 @@
 packages:
-  - "packages/*"
+  - "packages/config/*"
+  - "packages/utils/*"
+  - "packages/workshops/*"

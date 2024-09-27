@@ -1,5 +1,5 @@
 {
-  "name": "@hello-expressjs/hello-world",
+  "name": "@hello-expressjs/user-auth",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,7 @@
     "dev": "node --watch src/index.js"
   },
   "dependencies": {
-    "@hello-expressjs/config": "workspace:^",
+    "@hello-expressjs/environment-config": "workspace:^",
     "@hello-expressjs/sigint-server": "workspace:^",
     "express": "^4.21.0"
   },

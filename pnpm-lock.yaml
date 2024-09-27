@@ -8,20 +8,26 @@ importers:
 
   .: {}
 
-  packages/config:
+  packages/config/environment:
     devDependencies:
       semistandard:
         specifier: ^17.0.0
         version: 17.0.0
 
-  packages/hello-world:
+  packages/utils/sigint-server:
+    devDependencies:
+      semistandard:
+        specifier: ^17.0.0
+        version: 17.0.0
+
+  packages/workshops/hello-world:
     dependencies:
-      '@hello-expressjs/config':
+      '@hello-expressjs/environment-config':
         specifier: workspace:^
-        version: link:../config
+        version: link:../../config/environment
       '@hello-expressjs/sigint-server':
         specifier: workspace:^
-        version: link:../sigint-server
+        version: link:../../utils/sigint-server
       express:
         specifier: ^4.21.0
         version: 4.21.0
@@ -30,20 +36,14 @@ importers:
         specifier: ^17.0.0
         version: 17.0.0
 
-  packages/sigint-server:
-    devDependencies:
-      semistandard:
-        specifier: ^17.0.0
-        version: 17.0.0
-
-  packages/user-auth:
+  packages/workshops/user-auth:
     dependencies:
-      '@hello-expressjs/config':
+      '@hello-expressjs/environment-config':
         specifier: workspace:^
-        version: link:../config
+        version: link:../../config/environment
       '@hello-expressjs/sigint-server':
         specifier: workspace:^
-        version: link:../sigint-server
+        version: link:../../utils/sigint-server
       express:
         specifier: ^4.21.0
         version: 4.21.0

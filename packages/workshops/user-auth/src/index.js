@@ -1,11 +1,11 @@
-import { PORT } from '@hello-expressjs/config';
+import { PORT } from '@hello-expressjs/environment-config';
 import { sigintServer } from '@hello-expressjs/sigint-server';
 import express from 'express';
 
 const app = express();
 
 app.get('/', (_request, response) => {
-  response.send('Hello, Express.js!');
+  response.send('Hello, User Auth!');
 });
 
 const server = app.listen(PORT, () => {
