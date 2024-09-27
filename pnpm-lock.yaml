@@ -14,7 +14,7 @@ importers:
         specifier: ^17.0.0
         version: 17.0.0
 
-  packages/utils/sigint-server:
+  packages/utils/server-shutdown-handler:
     devDependencies:
       semistandard:
         specifier: ^17.0.0
@@ -25,9 +25,9 @@ importers:
       '@hello-expressjs/environment-config':
         specifier: workspace:^
         version: link:../../config/environment
-      '@hello-expressjs/sigint-server':
+      '@hello-expressjs/server-shutdown-handler':
         specifier: workspace:^
-        version: link:../../utils/sigint-server
+        version: link:../../utils/server-shutdown-handler
       express:
         specifier: ^4.21.0
         version: 4.21.0
@@ -41,9 +41,9 @@ importers:
       '@hello-expressjs/environment-config':
         specifier: workspace:^
         version: link:../../config/environment
-      '@hello-expressjs/sigint-server':
+      '@hello-expressjs/server-shutdown-handler':
         specifier: workspace:^
-        version: link:../../utils/sigint-server
+        version: link:../../utils/server-shutdown-handler
       express:
         specifier: ^4.21.0
         version: 4.21.0

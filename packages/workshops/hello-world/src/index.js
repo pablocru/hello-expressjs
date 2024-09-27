@@ -1,5 +1,5 @@
 import { PORT } from '@hello-expressjs/environment-config';
-import { sigintServer } from '@hello-expressjs/sigint-server';
+import { handleServerShutdown } from '@hello-expressjs/server-shutdown-handler';
 import express from 'express';
 
 const app = express();
@@ -12,4 +12,4 @@ const server = app.listen(PORT, () => {
   console.log('Server running on port', PORT);
 });
 
-sigintServer(server);
+handleServerShutdown(server);

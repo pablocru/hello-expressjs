@@ -1,9 +1,9 @@
 {
-  "name": "@hello-expressjs/sigint-server",
+  "name": "@hello-expressjs/server-shutdown-handler",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "src/sigint-server.js",
+  "main": "src/server-shutdown-handler.js",
   "devDependencies": {
     "semistandard": "^17.0.0"
   },
