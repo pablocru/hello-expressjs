@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@hello-expressjs/config": "workspace:^",
+    "@hello-expressjs/sigint-server": "workspace:^",
     "express": "^4.21.0"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
-import express from 'express';
 import { PORT } from '@hello-expressjs/config';
+import { sigintServer } from '@hello-expressjs/sigint-server';
+import express from 'express';
 
 const app = express();
 
@@ -11,10 +12,4 @@ const server = app.listen(PORT, () => {
   console.log('Server running on port', PORT);
 });
 
-// Close Express when Ctrl + C
-process.on('SIGINT', () => {
-  console.log('\nSIGINT signal received: closing server');
-  server.close(() => {
-    console.log('Server closed');
-  });
-});
+sigintServer(server);
