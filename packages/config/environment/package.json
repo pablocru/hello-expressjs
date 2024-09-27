@@ -3,14 +3,5 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "src/environment-config.js",
-  "devDependencies": {
-    "semistandard": "^17.0.0"
-  },
-  "eslintConfig": {
-    "extends": "semistandard"
-  },
-  "prettier": {
-    "singleQuote": true
-  }
+  "main": "src/environment-config.js"
 }

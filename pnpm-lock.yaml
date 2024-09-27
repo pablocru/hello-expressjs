@@ -6,19 +6,15 @@ settings:
 
 importers:
 
-  .: {}
-
-  packages/config/environment:
+  .:
     devDependencies:
       semistandard:
         specifier: ^17.0.0
         version: 17.0.0
 
-  packages/utils/server-shutdown-handler:
-    devDependencies:
-      semistandard:
-        specifier: ^17.0.0
-        version: 17.0.0
+  packages/config/environment: {}
+
+  packages/utils/server-shutdown-handler: {}
 
   packages/workshops/hello-world:
     dependencies:
@@ -31,10 +27,6 @@ importers:
       express:
         specifier: ^4.21.0
         version: 4.21.0
-    devDependencies:
-      semistandard:
-        specifier: ^17.0.0
-        version: 17.0.0
 
   packages/workshops/user-auth:
     dependencies:
@@ -47,10 +39,6 @@ importers:
       express:
         specifier: ^4.21.0
         version: 4.21.0
-    devDependencies:
-      semistandard:
-        specifier: ^17.0.0
-        version: 17.0.0
 
 packages:
 

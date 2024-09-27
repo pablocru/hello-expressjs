@@ -11,14 +11,5 @@
     "@hello-expressjs/environment-config": "workspace:^",
     "@hello-expressjs/server-shutdown-handler": "workspace:^",
     "express": "^4.21.0"
-  },
-  "devDependencies": {
-    "semistandard": "^17.0.0"
-  },
-  "eslintConfig": {
-    "extends": "semistandard"
-  },
-  "prettier": {
-    "singleQuote": true
   }
 }
