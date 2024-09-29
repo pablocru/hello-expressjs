@@ -23,9 +23,15 @@ export class UserRepository {
     const id = crypto.randomUUID();
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    User.create({ _id: id, username, password: hashedPassword }).save();
+    const newUser = User.create({
+      _id: id,
+      username,
+      password: hashedPassword,
+    }).save();
 
-    return id;
+    const { password: _, ...publicUserInfo } = newUser;
+
+    return publicUserInfo;
   }
 
   static async login({ username, password }) {
@@ -41,6 +47,8 @@ export class UserRepository {
       throw new Error('Password is invalid');
     }
 
-    return user._id;
+    const { password: _, ...publicUserInfo } = user;
+
+    return publicUserInfo;
   }
 }

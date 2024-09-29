@@ -18,8 +18,8 @@ app.get('/', (_request, response) => {
 
 app.post('/login', async (request, response) => {
   try {
-    const loggedUserId = await UserRepository.login(request.body);
-    response.send({ loggedUserId });
+    const loggedUser = await UserRepository.login(request.body);
+    response.send(loggedUser);
   } catch (error) {
     response.status(401).send({ message: error.message });
   }
@@ -27,8 +27,8 @@ app.post('/login', async (request, response) => {
 
 app.post('/register', async (request, response) => {
   try {
-    const newUserId = await UserRepository.create(request.body);
-    response.send({ newUserId });
+    const registeredUser = await UserRepository.create(request.body);
+    response.send(registeredUser);
   } catch (error) {
     response.status(400).send({ message: error.message });
   }
