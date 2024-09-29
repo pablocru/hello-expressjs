@@ -49,7 +49,7 @@
 
   <section id="login">
     <h2>Login</h2>
-    <form id="login" method="post">
+    <form id="form-login" method="post">
       <label for="username">Username: </label>
       <input type="text" id="username" name="username" />
       <label for="username">Password: </label>
@@ -61,7 +61,7 @@
 
   <section id="register">
     <h2>Register</h2>
-    <form id="register" method="post">
+    <form id="form-register" method="post">
       <label for="username">Username: </label>
       <input type="text" id="username" name="username" />
       <label for="username">Password: </label>
@@ -81,14 +81,14 @@
     switchToRegister.addEventListener('click', displayRegister);
     switchToLogin.addEventListener('click', displayLogin);
 
-    const formLogin = document.querySelector('form#login');
+    const formLogin = document.getElementById('form-login');
     formLogin.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       callAPI("/login", new FormData(event.target));
     });
 
-    const formRegister = document.querySelector('form#register');
+    const formRegister = document.getElementById('form-register');
     formRegister.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -100,11 +100,13 @@
     function displayRegister () {
       sectionLogin.style.display = 'none';
       sectionRegister.style.display = 'block';
+      formLogin.reset();
     }
 
     function displayLogin () {
       sectionLogin.style.display = 'block';
       sectionRegister.style.display = 'none';
+      formRegister.reset();
     }
 
     async function callAPI (path, formData) {
