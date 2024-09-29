@@ -5,11 +5,15 @@ import express from 'express';
 
 const app = express();
 
+// Specify template engine that is EJS (Embedded JavaScript Templates)
+// -> https://ejs.co/
+app.set('view engine', 'ejs');
+
 // Middleware to process JSON
 app.use(express.json());
 
 app.get('/', (_request, response) => {
-  response.send('Hello, User Auth!');
+  response.render('index', { username: 'User Auth' });
 });
 
 app.post('/login', async (request, response) => {
