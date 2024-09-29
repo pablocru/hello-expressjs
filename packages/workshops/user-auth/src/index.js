@@ -96,6 +96,10 @@ app.get('/profile', (request, response) => {
   response.render('profile', user);
 });
 
+app.post('/logout', (_request, response) => {
+  response.clearCookie(JWT_COOKIE_NAME).redirect('/');
+});
+
 const server = app.listen(PORT, () => {
   console.log('Server running on port', PORT);
 });

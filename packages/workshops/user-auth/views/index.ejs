@@ -10,11 +10,16 @@
   <body>
     <h1>Express User Auth</h1>
 
-    <% if (typeof username !=='undefined') {%>
+    <% if (typeof username !== 'undefined') {%>
 
     <section>
       <h2>Welcome <%= username %>!</h2>
+
       <a href="/profile">Go to your profile</a>
+
+      <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
     </section>
 
     <%} else {%>
