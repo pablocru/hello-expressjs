@@ -12,6 +12,24 @@ const User = Schema('User', {
 });
 
 export class UserRepository {
+  static async login({ username, password }) {
+    validateUsernameAndPassword(username, password);
+
+    const user = User.findOne({ username });
+    if (!user) {
+      throw new Error('Username does not exists');
+    }
+
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      throw new Error('Password is invalid');
+    }
+
+    const { password: _, ...publicUserInfo } = user;
+
+    return publicUserInfo;
+  }
+
   static async create({ username, password }) {
     validateUsernameAndPassword(username, password);
 
@@ -30,24 +48,6 @@ export class UserRepository {
     }).save();
 
     const { password: _, ...publicUserInfo } = newUser;
-
-    return publicUserInfo;
-  }
-
-  static async login({ username, password }) {
-    validateUsernameAndPassword(username, password);
-
-    const user = User.findOne({ username });
-    if (!user) {
-      throw new Error('Username does not exists');
-    }
-
-    const isValid = await bcrypt.compare(password, user.password);
-    if (!isValid) {
-      throw new Error('Password is invalid');
-    }
-
-    const { password: _, ...publicUserInfo } = user;
 
     return publicUserInfo;
   }
