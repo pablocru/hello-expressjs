@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 
 app.get('/', (_request, response) => {
-  response.render('index', { username: 'User Auth' });
+  response.render('index');
 });
 
 app.post('/login', async (request, response) => {
