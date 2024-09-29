@@ -1,132 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express User Auth</title>
+    <style>
+      :root {
+        font-family: sans-serif;
+        font-synthesis: none;
+        font-size: 20px;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+        box-sizing: border-box;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Express User Auth</title>
-  <style>
-    :root {
-      font-family: sans-serif;
-      font-synthesis: none;
-      font-size: 20px;
-      line-height: 1.5;
-      text-rendering: optimizeLegibility;
-      box-sizing: border-box;
-    }
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: inherit;
-    }
+      h1 {
+        font-size: 2em;
+      }
 
-    h1 {
-      font-size: 2em;
-    }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: serif;
+      }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: serif;
-    }
+      section#login {
+        display: block;
+      }
 
-    section#login {
-      display: block;
-    }
+      section#register {
+        display: none;
+      }
+    </style>
+  </head>
 
-    section#register {
-      display: none;
-    }
-  </style>
-</head>
+  <body>
+    <h1>Express User Auth</h1>
 
-<body>
-  <h1>Express User Auth</h1>
+    <% if (typeof username !=='undefined') {%>
 
-  <section id="login">
-    <h2>Login</h2>
-    <form id="form-login" method="post">
-      <label for="username">Username: </label>
-      <input type="text" id="username" name="username" />
-      <label for="username">Password: </label>
-      <input type="text" id="password" name="password" />
-      <input type="submit" value="Login" />
-    </form>
-    <button id="switch-to-register">Create account</button>
-  </section>
+    <section>
+      <h2>Welcome <%= username %>!</h2>
+      <a href="/profile">Go to your profile</a>
+    </section>
 
-  <section id="register">
-    <h2>Register</h2>
-    <form id="form-register" method="post">
-      <label for="username">Username: </label>
-      <input type="text" id="username" name="username" />
-      <label for="username">Password: </label>
-      <input type="text" id="password" name="password" />
-      <input type="submit" value="Register" />
-    </form>
-    <button id="switch-to-login">Already have an account</button>
-  </section>
+    <%} else {%>
 
-  <script>
-    const sectionLogin = document.getElementById('login');
-    const switchToRegister = document.getElementById('switch-to-register');
+    <section id="login">
+      <h2>Login</h2>
+      <form id="form-login" method="post">
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username" />
+        <label for="username">Password: </label>
+        <input type="text" id="password" name="password" />
+        <input type="submit" value="Login" />
+      </form>
+      <button id="switch-to-register">Create account</button>
+    </section>
 
-    const sectionRegister = document.getElementById('register');
-    const switchToLogin = document.getElementById('switch-to-login');
+    <section id="register">
+      <h2>Register</h2>
+      <form id="form-register" method="post">
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username" />
+        <label for="username">Password: </label>
+        <input type="text" id="password" name="password" />
+        <input type="submit" value="Register" />
+      </form>
+      <button id="switch-to-login">Already have an account</button>
+    </section>
 
-    switchToRegister.addEventListener('click', displayRegister);
-    switchToLogin.addEventListener('click', displayLogin);
+    <script>
+      const sectionLogin = document.getElementById('login');
+      const switchToRegister = document.getElementById('switch-to-register');
 
-    const formLogin = document.getElementById('form-login');
-    formLogin.addEventListener('submit', async (event) => {
-      event.preventDefault();
+      const sectionRegister = document.getElementById('register');
+      const switchToLogin = document.getElementById('switch-to-login');
 
-      callAPI("/login", new FormData(event.target));
-    });
+      switchToRegister.addEventListener('click', displayRegister);
+      switchToLogin.addEventListener('click', displayLogin);
 
-    const formRegister = document.getElementById('form-register');
-    formRegister.addEventListener('submit', async (event) => {
-      event.preventDefault();
+      const formLogin = document.getElementById('form-login');
+      formLogin.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-      callAPI("/register", new FormData(event.target));
-
-      displayLogin();
-    });
-
-    function displayRegister () {
-      sectionLogin.style.display = 'none';
-      sectionRegister.style.display = 'block';
-      formLogin.reset();
-    }
-
-    function displayLogin () {
-      sectionLogin.style.display = 'block';
-      sectionRegister.style.display = 'none';
-      formRegister.reset();
-    }
-
-    async function callAPI (path, formData) {
-      const jsonData = Object.fromEntries(formData.entries());
-
-      const response = await fetch(path, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(jsonData),
+        callAPI('/login', formLogin, '/profile');
       });
 
-      const result = await response.json();
+      const formRegister = document.getElementById('form-register');
+      formRegister.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-      if (response.ok) {
-        console.log('Ok: ', result);
-      } else {
-        console.error('Error', { status: response.status, ...result });
+        callAPI('/register', formRegister);
+
+        displayLogin();
+      });
+
+      function displayRegister() {
+        sectionLogin.style.display = 'none';
+        sectionRegister.style.display = 'block';
+        formLogin.reset();
       }
-    }
-  </script>
-</body>
 
+      function displayLogin() {
+        sectionLogin.style.display = 'block';
+        sectionRegister.style.display = 'none';
+        formRegister.reset();
+      }
+
+      async function callAPI(path, form, moveTo) {
+        const jsonData = Object.fromEntries(new FormData(form).entries());
+
+        const response = await fetch(path, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(jsonData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          console.log('Ok: ', result);
+
+          form.reset();
+
+          if (moveTo) window.location.assign(moveTo);
+        } else {
+          console.error('Error', { status: response.status, ...result });
+        }
+      }
+    </script>
+
+    <%}%>
+  </body>
 </html>
