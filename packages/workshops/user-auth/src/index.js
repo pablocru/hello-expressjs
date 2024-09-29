@@ -1,9 +1,11 @@
+import { fileURLToPath } from 'url';
 import { handleServerShutdown } from '@hello-expressjs/server-shutdown-handler';
 import { PORT } from '@hello-expressjs/environment-config';
 import { UserRepository } from './user-repository.js';
+import cookieParser from 'cookie-parser';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import cookieParser from 'cookie-parser';
+import path from 'path';
 
 const JWT_COOKIE_NAME = 'access_token';
 const JWT_SECRET_KEY =
@@ -11,6 +13,9 @@ const JWT_SECRET_KEY =
   '-use-environment-variables-instead' +
   '-also-use-numbers-and-symbols' +
   '-it-is-even-better-to-hash-or-encode-this-secret';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -39,6 +44,9 @@ app.use((request, _response, next) => {
 
   next(); // Go to the next route/middleware
 });
+
+// -> to serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (request, response) => {
   const { user } = request.session;
