@@ -48,6 +48,19 @@ app.use((request, _response, next) => {
 // -> to serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '../public')));
 
+// Optional middlewares
+// -> to protect those endpoints or routes that should be protected
+function isAuthenticated(req, res, next) {
+  const { user } = req.session;
+
+  if (user) {
+    next(); // Go to the next route/middleware
+  } else {
+    // Redirect to Login/Register page
+    res.redirect('/');
+  }
+}
+
 app.get('/', (request, response) => {
   const { user } = request.session;
 
@@ -84,14 +97,8 @@ app.post('/register', async (request, response) => {
   }
 });
 
-app.get('/profile', (request, response) => {
+app.get('/profile', isAuthenticated, (request, response) => {
   const { user } = request.session;
-
-  if (!user) {
-    return response
-      .status(401)
-      .send({ message: 'Access unauthorized: Invalid token' });
-  }
 
   response.render('profile', user);
 });
