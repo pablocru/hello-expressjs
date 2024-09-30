@@ -1,18 +1,18 @@
 import { isAuthenticated } from '../middleware/auth.js';
+import { Router } from 'express';
 
-/**
- * @param {import("express").Application} app
- */
-export function createRouter(app) {
-  app.get('/', (request, response) => {
-    const { user } = request.session;
+const router = Router();
 
-    response.render('index', user);
-  });
+router.get('/', (request, response) => {
+  const { user } = request.session;
 
-  app.get('/profile', isAuthenticated, (request, response) => {
-    const { user } = request.session;
+  response.render('index', user);
+});
 
-    response.render('profile', user);
-  });
-}
+router.get('/profile', isAuthenticated, (request, response) => {
+  const { user } = request.session;
+
+  response.render('profile', user);
+});
+
+export default router;

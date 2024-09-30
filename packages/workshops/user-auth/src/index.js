@@ -1,12 +1,12 @@
-import { createAPI } from './api/index.js';
-import { createRouter } from './router/index.js';
 import { fileURLToPath } from 'url';
 import { handleServerShutdown } from '@hello-expressjs/server-shutdown-handler';
 import { jwtSessionManager } from './middleware/auth.js';
 import { PORT } from '@hello-expressjs/environment-config';
+import auth from './api/index.js';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import path from 'path';
+import router from './router/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,11 +32,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 // -> to process the JWT & Session
 app.use(jwtSessionManager);
 
-// Routes for this App
-createRouter(app);
+// Routes
+// -> Application UI
+app.use('/', router);
 
-// API for this App
-createAPI(app);
+// -> Auth API REST
+app.use('/auth', auth);
 
 // Start App
 const server = app.listen(PORT, () => {

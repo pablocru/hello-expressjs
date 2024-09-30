@@ -17,7 +17,7 @@
 
       <a href="/profile">Go to your profile</a>
 
-      <form action="/logout" method="POST">
+      <form action="/auth/logout" method="POST">
         <button type="submit">Logout</button>
       </form>
     </section>
@@ -89,7 +89,7 @@
       async function callAPI(path, form, moveTo) {
         const jsonData = Object.fromEntries(new FormData(form).entries());
 
-        const response = await fetch(path, {
+        const response = await fetch('/auth' + path, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(jsonData),
