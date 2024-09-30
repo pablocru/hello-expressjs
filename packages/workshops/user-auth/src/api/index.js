@@ -49,11 +49,11 @@ function authError(request, response, apiPath, errorMessage) {
   response
     .cookie(
       AUTH_FORM_ERROR_COOKIE_NAME,
-      JSON.stringify({
+      {
         message: errorMessage,
         apiPath,
         ...request.body,
-      }),
+      },
       createCookieOptions({ maxAge: 60_000 })
     )
     .redirect('/');

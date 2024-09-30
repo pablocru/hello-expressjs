@@ -5,14 +5,12 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('/', (request, response) => {
-  const authFormErrorString = request.cookies[AUTH_FORM_ERROR_COOKIE_NAME];
+  const authFormError = request.cookies[AUTH_FORM_ERROR_COOKIE_NAME];
 
-  if (authFormErrorString) {
-    const authFormErrorData = JSON.parse(authFormErrorString);
-
+  if (authFormError) {
     return response
       .clearCookie(AUTH_FORM_ERROR_COOKIE_NAME)
-      .render('index', { status: 'error', ...authFormErrorData });
+      .render('index', { status: 'error', ...authFormError });
   }
 
   const { user } = request.session;
