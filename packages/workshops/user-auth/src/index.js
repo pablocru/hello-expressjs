@@ -22,6 +22,7 @@ const app = express();
 // Specify template engine that is EJS (Embedded JavaScript Templates)
 // -> https://ejs.co/
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'));
 
 // Middlewares
 // -> to process JSON
