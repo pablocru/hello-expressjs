@@ -1,9 +1,17 @@
-import { validateUsernameAndPassword } from './validations.js';
+import { fileURLToPath } from 'url';
+import { HASH_ROUNDS } from '../config.js';
+import { validateUsernameAndPassword } from '../utils/validations.js';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import DBLocal from 'db-local';
+import path from 'path';
 
-const { Schema } = new DBLocal({ path: './local-database' });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const { Schema } = new DBLocal({
+  path: path.join(__dirname, 'local-database'),
+});
 
 const User = Schema('User', {
   _id: { type: String, required: true },
@@ -39,7 +47,7 @@ export class UserRepository {
     }
 
     const id = crypto.randomUUID();
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, HASH_ROUNDS);
 
     const newUser = User.create({
       _id: id,
