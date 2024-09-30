@@ -8,11 +8,11 @@ router.get('/', (request, response) => {
   const authFormErrorString = request.cookies[AUTH_FORM_ERROR_COOKIE_NAME];
 
   if (authFormErrorString) {
-    const loginFormErrorData = JSON.parse(authFormErrorString);
+    const authFormErrorData = JSON.parse(authFormErrorString);
 
     return response
       .clearCookie(AUTH_FORM_ERROR_COOKIE_NAME)
-      .render('index', { status: 'error', ...loginFormErrorData });
+      .render('index', { status: 'error', ...authFormErrorData });
   }
 
   const { user } = request.session;
