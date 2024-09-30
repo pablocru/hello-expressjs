@@ -49,14 +49,10 @@ export class UserRepository {
     const id = crypto.randomUUID();
     const hashedPassword = await bcrypt.hash(password, HASH_ROUNDS);
 
-    const newUser = User.create({
+    User.create({
       _id: id,
       username,
       password: hashedPassword,
     }).save();
-
-    const { password: _, ...publicUserInfo } = newUser;
-
-    return publicUserInfo;
   }
 }

@@ -20,9 +20,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middlewares
-// -> to process JSON
-app.use(express.json());
-
 // -> to manage Cookies
 app.use(cookieParser());
 

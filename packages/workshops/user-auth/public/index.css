@@ -25,11 +25,3 @@ h5,
 h6 {
   font-family: serif;
 }
-
-section#login {
-  display: block;
-}
-
-section#register {
-  display: none;
-}

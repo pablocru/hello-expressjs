@@ -1,9 +1,17 @@
-import { JWT_COOKIE_NAME, JWT_SECRET_KEY } from '../config.js';
-import { Router } from 'express';
+import {
+  AUTH_FORM_ERROR_COOKIE_NAME,
+  JWT_COOKIE_NAME,
+  JWT_SECRET_KEY,
+} from '../config.js';
+import { createCookieOptions } from '../utils/create-cookie-options.js';
+import { Router, urlencoded } from 'express';
 import { UserRepository } from '../dao/user-repository.js';
 import jwt from 'jsonwebtoken';
 
 const auth = Router();
+
+// Middleware to process `application/x-www-form-urlencoded` that is sended by a Form
+auth.use(urlencoded({ extended: true }));
 
 auth.post('/login', async (request, response) => {
   try {
@@ -14,26 +22,42 @@ auth.post('/login', async (request, response) => {
     });
 
     response
-      .cookie(JWT_COOKIE_NAME, token, {
-        httpOnly: true, // The Cookie can only be accessed on the server
-        secure: process.env.NODE_ENV === 'production', // Use `https` on production
-        sameSite: 'strict', // Can only be acceded in the same domain
-        maxAge: 1000 * (60 * 2), // Expires in 1h, like the JWT
-      })
-      .send(loggedUser);
+      .cookie(JWT_COOKIE_NAME, token, createCookieOptions())
+      .redirect('/profile');
   } catch (error) {
-    response.status(401).send({ message: error.message });
+    authError(request, response, 'login', error.message);
   }
 });
 
 auth.post('/register', async (request, response) => {
   try {
-    const registeredUser = await UserRepository.create(request.body);
-    response.send(registeredUser);
+    await UserRepository.create(request.body);
+
+    response.redirect('/');
   } catch (error) {
-    response.status(400).send({ message: error.message });
+    authError(request, response, 'register', error.message);
   }
 });
+
+/**
+ * @param {import("express").Request} request
+ * @param {import("express").Response} response
+ * @param {string} apiPath
+ * @param {string} errorMessage
+ */
+function authError(request, response, apiPath, errorMessage) {
+  response
+    .cookie(
+      AUTH_FORM_ERROR_COOKIE_NAME,
+      JSON.stringify({
+        message: errorMessage,
+        apiPath,
+        ...request.body,
+      }),
+      createCookieOptions({ maxAge: 60_000 })
+    )
+    .redirect('/');
+}
 
 auth.post('/logout', (_request, response) => {
   response.clearCookie(JWT_COOKIE_NAME).redirect('/');
