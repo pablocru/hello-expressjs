@@ -1,2 +1,5 @@
 # Node dependency folder
 node_modules
+
+# Build output folder
+dist
