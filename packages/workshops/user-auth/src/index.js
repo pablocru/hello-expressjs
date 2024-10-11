@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url';
-import { handleServerShutdown } from '@hello-expressjs/server-shutdown-handler';
 import { jwtSessionManager } from './middleware/auth.js';
 import { PORT } from '@hello-expressjs/environment-config';
+import { serverLifecycleHandler } from '@hello-expressjs/server-lifecycle-handler';
 import auth from './api/index.js';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -37,9 +37,4 @@ app.use('/', router);
 app.use('/auth', auth);
 
 // Start App
-const server = app.listen(PORT, () => {
-  console.log('Server running on port', PORT);
-});
-
-// Stop App
-handleServerShutdown(server);
+serverLifecycleHandler(app, PORT);

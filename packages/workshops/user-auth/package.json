@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@hello-expressjs/environment-config": "workspace:^",
-    "@hello-expressjs/server-shutdown-handler": "workspace:^",
+    "@hello-expressjs/server-lifecycle-handler": "workspace:^",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "db-local": "^3.1.0",

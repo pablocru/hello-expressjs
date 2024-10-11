@@ -1,5 +1,5 @@
 import { PORT } from '@hello-expressjs/environment-config';
-import { handleServerShutdown } from '@hello-expressjs/server-shutdown-handler';
+import { serverLifecycleHandler } from '@hello-expressjs/server-lifecycle-handler';
 import express from 'express';
 
 const app = express();
@@ -8,8 +8,4 @@ app.get('/', (_request, response) => {
   response.send('Hello, Express.js!');
 });
 
-const server = app.listen(PORT, () => {
-  console.log('Server running on port', PORT);
-});
-
-handleServerShutdown(server);
+serverLifecycleHandler(app, PORT);

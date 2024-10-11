@@ -1,7 +1,0 @@
-{
-  "name": "@hello-expressjs/server-shutdown-handler",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "main": "src/server-shutdown-handler.js"
-}

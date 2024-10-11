@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@hello-expressjs/environment-config": "workspace:^",
-    "@hello-expressjs/server-shutdown-handler": "workspace:^",
+    "@hello-expressjs/server-lifecycle-handler": "workspace:^",
     "express": "^4.21.0"
   }
 }
