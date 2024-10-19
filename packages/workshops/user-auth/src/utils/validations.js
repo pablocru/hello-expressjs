@@ -3,10 +3,10 @@
  * @param {string} password
  */
 export function validateUsernameAndPassword(username, password) {
-  validateString(username, 'Username');
-  validateStringLength(username, 'Username', 3);
-  validateString(password, 'Password');
-  validateStringLength(password, 'Password', 6);
+  validateString(username, "Username");
+  validateStringLength(username, "Username", 3);
+  validateString(password, "Password");
+  validateStringLength(password, "Password", 6);
 }
 
 /**
@@ -14,7 +14,7 @@ export function validateUsernameAndPassword(username, password) {
  * @param {string} stringName
  */
 function validateString(string, stringName) {
-  if (typeof string !== 'string') {
+  if (typeof string !== "string") {
     throw new Error(`${stringName} must be a string`);
   }
 }

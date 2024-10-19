@@ -1,11 +1,11 @@
-import { PORT } from '@hello-expressjs/environment-config';
-import { serverLifecycleHandler } from '@hello-expressjs/server-lifecycle-handler';
-import express from 'express';
+import { PORT } from "@hello-expressjs/environment-config";
+import { serverLifecycleHandler } from "@hello-expressjs/server-lifecycle-handler";
+import express from "express";
 
 const app = express();
 
-app.get('/', (_request, response) => {
-  response.send('Hello, Express.js!');
+app.get("/", (_request, response) => {
+  response.send("Hello, Express.js!");
 });
 
 serverLifecycleHandler(app, PORT);

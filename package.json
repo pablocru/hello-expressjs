@@ -7,16 +7,9 @@
     "node": "v20.17.0"
   },
   "devDependencies": {
-    "semistandard": "^17.0.0"
-  },
-  "eslintConfig": {
-    "extends": "semistandard",
-    "rules": {
-      "space-before-function-paren": "off",
-      "comma-dangle": "off"
-    }
-  },
-  "prettier": {
-    "singleQuote": true
+    "@eslint/js": "^9.12.0",
+    "eslint": "^9.12.0",
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.8.1"
   }
 }

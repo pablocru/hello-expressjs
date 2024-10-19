@@ -1,5 +1,5 @@
-import { JWT_COOKIE_NAME, JWT_SECRET_KEY } from '../config.js';
-import jwt from 'jsonwebtoken';
+import { JWT_COOKIE_NAME, JWT_SECRET_KEY } from "../config.js";
+import jwt from "jsonwebtoken";
 
 /**
  * Process the JWT & Session
@@ -16,7 +16,9 @@ export function jwtSessionManager(request, _response, next) {
     const data = jwt.verify(token, JWT_SECRET_KEY);
 
     request.session.user = data;
-  } catch {}
+  } catch (error) {
+    console.error(error);
+  }
 
   next(); // Go to the next route/middleware
 }
@@ -34,6 +36,6 @@ export function isAuthenticated(req, res, next) {
     next(); // Go to the next route/middleware
   } else {
     // Redirect to Login/Register page
-    res.redirect('/');
+    res.redirect("/");
   }
 }
