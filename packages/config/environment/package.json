@@ -3,5 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "src/environment-config.js"
+  "exports": "./dist/environment-config.js",
+  "types": "./dist/environment-config.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "typescript": "^5.6.3"
+  }
 }

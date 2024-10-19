@@ -4,12 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch src/index.js"
+    "build": "bundle --input=src/index.ts",
+    "serve:watch": "node --watch dist/index.js",
+    "dev": "npm-run-all2 -s build -p \"build --watch\" serve:watch --race --print-label"
   },
   "dependencies": {
     "@hello-expressjs/environment-config": "workspace:^",
     "@hello-expressjs/server-lifecycle-handler": "workspace:^",
     "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@hello-expressjs/bundler": "workspace:^",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "typescript": "^5.6.3"
   }
 }

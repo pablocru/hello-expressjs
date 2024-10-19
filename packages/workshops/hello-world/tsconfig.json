@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    // TSC work as a Linter so doesn't transform to JS
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+  },
+  "include": [
+    "src/"
+  ]
+}

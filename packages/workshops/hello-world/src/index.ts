@@ -5,7 +5,7 @@ import express from "express";
 const app = express();
 
 app.get("/", (_request, response) => {
-  response.send("Hello, Express.js!");
+  response.send("Hello, Express.js + TypeScript!");
 });
 
 serverLifecycleHandler(app, PORT);

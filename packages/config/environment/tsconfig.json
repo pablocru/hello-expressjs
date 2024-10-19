@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "NodeNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    // TSC transform to JS
+    "moduleResolution": "NodeNext",
+    "declaration": true,
+    "outDir": "dist",
+  },
+  "include": [
+    "src/"
+  ]
+}
