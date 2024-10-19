@@ -12,12 +12,14 @@ export function jwtSessionManager(request, _response, next) {
 
   request.session = { user: null };
 
-  try {
-    const data = jwt.verify(token, JWT_SECRET_KEY);
+  if (token) {
+    try {
+      const data = jwt.verify(token, JWT_SECRET_KEY);
 
-    request.session.user = data;
-  } catch (error) {
-    console.error(error);
+      request.session.user = data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   next(); // Go to the next route/middleware
