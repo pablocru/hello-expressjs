@@ -1,0 +1,13 @@
+{
+  "name": "@hello-expressjs/bundler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "bundle": "esbuild.config.js"
+  },
+  "dependencies": {
+    "@sprout2000/esbuild-copy-plugin": "^1.1.16",
+    "esbuild": "^0.24.0"
+  }
+}

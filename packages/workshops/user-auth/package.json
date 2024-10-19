@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch src/index.js"
+    "build": "bundle --copy=src/views,dist/views",
+    "serve": "node -- dist/index.js",
+    "dev": "npm-run-all2 -s build -p \"build --watch\" \"serve --watch\" --race --print-label"
   },
   "dependencies": {
     "@hello-expressjs/environment-config": "workspace:^",
@@ -16,5 +17,8 @@
     "ejs": "^3.1.10",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@hello-expressjs/bundler": "workspace:^"
   }
 }
